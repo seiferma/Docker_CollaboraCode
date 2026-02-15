@@ -1,5 +1,5 @@
 variable "COLLABORA_VERSION" {
-  # renovate: datasource=docker depName=keycloak/keycloak
+  # renovate: datasource=docker depName=collabora/code versioning=loose
   default = "25.04.8.3.1"
 }
 
