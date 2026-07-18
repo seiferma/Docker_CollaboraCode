@@ -1,12 +1,10 @@
 ARG COLLABORA_VERSION=
-FROM collabora/code:${COLLABORA_VERSION} AS builder
+FROM collabora/code:${COLLABORA_VERSION} AS base
 
-USER root
-RUN sed -i 's#:1001:1001:#:101001:101001:#g' /etc/passwd && \
-    sed -i 's#:1001:#:101001:#g' /etc/group
+FROM busybox:latest AS builder
+COPY --from=base /etc/passwd /etc/group /tmp
+RUN sed -i 's#:1001:1001:#:101001:101001:#g' /tmp/passwd && \
+    sed -i 's#:1001:#:101001:#g' /tmp/group
 
-
-ARG COLLABORA_VERSION=
-FROM collabora/code:${COLLABORA_VERSION} 
-
-COPY --from=builder /etc/passwd /etc/group /etc
+FROM base
+COPY --from=builder /tmp/passwd /tmp/group /etc
