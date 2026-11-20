@@ -1,6 +1,6 @@
 variable "COLLABORA_VERSION" {
   # renovate: datasource=docker depName=collabora/code versioning=loose
-  default = "26.04.6.1.1"
+  default = "26.04.6.2.1"
 }
 
 group "default" {
